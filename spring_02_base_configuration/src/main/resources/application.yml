@@ -1,0 +1,17 @@
+server:
+  port: 81
+
+likes:
+  - game
+  - music
+  - sleep
+
+likes2: [game,music,sleep]
+
+users:
+  - name: zhangsan
+    age: 18
+  - name: lisi
+    age: 17
+
+users2: [{name:zhangsan,age:18},{name:lisi,age:17}]
