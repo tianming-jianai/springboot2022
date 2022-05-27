@@ -1,6 +1,10 @@
 server:
   port: 81
 
+country: china
+user:
+  name: zhangsan
+
 likes:
   - game
   - music
@@ -15,3 +19,12 @@ users:
     age: 17
 
 users2: [{name:zhangsan,age:18},{name:lisi,age:17}]
+
+baseDir: C:\windows
+tempDir: ${baseDir}\temp
+
+datasource:
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost/springboot_db
+  username: root
+  password: root666

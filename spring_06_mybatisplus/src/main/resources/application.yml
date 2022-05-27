@@ -1,0 +1,9 @@
+# 配置数据源
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/test
+      username: root
+      password: m123
+#    type: com.alibaba.druid.pool.DruidDataSource
