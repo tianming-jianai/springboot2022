@@ -229,12 +229,36 @@
       },
       methods: {
         // 列表
+        // getAll() {
+        //   axios.get("/books").then((res) => {
+        //     if (res.data.flag) {
+        //       this.dataList = res.data.data;
+        //     }
+        //   });
+        // },
+        // 分页查询
         getAll() {
-          axios.get("/books").then((res) => {
-            if (res.data.flag) {
-              this.dataList = res.data.data;
-            }
-          });
+          // 获取查询条件拼接查询条件 最简单写法
+          let param = "?name=" + this.pagination.name;
+          param += "&type=" + this.pagination.type;
+          param += "&description=" + this.pagination.description;
+          console.log("-------------" + param);
+          axios
+            .get(
+              "/books/" +
+                this.pagination.currentPage +
+                "/" +
+                this.pagination.pageSize +
+                param
+            )
+            .then((res) => {
+              if (res.data.flag) {
+                this.pagination.currentPage = res.data.data.current;
+                this.pagination.pageSize = res.data.data.size;
+                this.pagination.total = res.data.data.total;
+                this.dataList = res.data.data.records;
+              }
+            });
         },
         // 弹出添加窗口
         handleCreate() {
@@ -253,9 +277,9 @@
               if (res.data.flag) {
                 // 1. 关闭弹层
                 this.dialogFormVisible = false;
-                this.$message.success("添加成功");
+                this.$message.success(res.data.msg); // 消息全部由后台管理
               } else {
-                this.$message.success("添加失败");
+                this.$message.success(res.data.msg);
               }
             })
             .finally(() => {
@@ -328,6 +352,13 @@
             .finally(() => {
               this.getAll();
             });
+        },
+        // 切换页码
+        handleCurrentChange(currentPage) {
+          // 1. 修改页码值为当前选中的页码值
+          this.pagination.currentPage = currentPage;
+          // 2. 执行查询
+          this.getAll();
         },
       },
     });

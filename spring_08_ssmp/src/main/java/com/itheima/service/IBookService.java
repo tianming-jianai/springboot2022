@@ -14,9 +14,12 @@ import com.itheima.domain.Book;
 public interface IBookService extends IService<Book> {
     /**
      * 接收参数返回页数据
+     *
      * @param current 当前页
-     * @param size 每页条数
+     * @param size    每页条数
      * @return
      */
     IPage<Book> page(int current, int size);
+
+    IPage<Book> page(int current, int size, Book book);
 }
